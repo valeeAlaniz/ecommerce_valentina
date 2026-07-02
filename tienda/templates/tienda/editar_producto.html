@@ -1,0 +1,45 @@
+{% extends 'tienda/base.html' %}
+
+{% block title %}Editar Producto - {{ producto.nombre }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title mb-4 fw-bold text-warning">Editar Producto</h3>
+                <h6 class="text-muted mb-3">Modificando: {{ producto.nombre }}</h6>
+                <hr>
+                
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <div class="form-text">{{ field.help_text }}</div>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-warning">Actualizar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+        if(el.type !== 'checkbox') el.classList.add('form-control');
+    });
+</script>
+{% endblock %}

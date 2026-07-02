@@ -1,0 +1,31 @@
+{% extends 'tienda/base.html' %}
+{% block title %}Categorías{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+    <h2 class="fw-bold">Categorías de la Tienda</h2>
+    {% if perms.tienda.add_categoria %}
+        <a href="{% url 'crear_categoria' %}" class="btn btn-dark">+ Nueva Categoría</a>
+    {% endif %}
+</div>
+
+<div class="row">
+    {% for cat in categorias %}
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm h-100 border-0" style="background-color: #f8f9fa;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-capitalize">
+                        <a href="{% url 'ver_categoria' cat.id %}" class="text-decoration-none text-dark stretched-link">{{ cat.nombre }}</a>
+                    </h5>
+                    <hr>
+                    <p class="card-text text-secondary">{{ cat.descripcion|default:"Sin descripción disponible." }}</p>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12 text-center text-muted py-5">
+            <h5>No hay categorías registradas aún.</h5>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

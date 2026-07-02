@@ -1,0 +1,26 @@
+{% extends 'tienda/base.html' %}
+
+{% block title %}Eliminar Producto{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card border-danger shadow-sm">
+            <div class="card-body text-center">
+                <h3 class="card-title text-danger fw-bold mb-3">¿Estás segura?</h3>
+                <p class="lead">Estás a punto de eliminar el producto: <br><strong>{{ producto.nombre }}</strong></p>
+                <p class="text-muted small">El producto ya no se mostrará en el catálogo público de la tienda.</p>
+                <hr>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-around mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-secondary px-4">No, Cancelar</a>
+                        <button type="submit" class="btn btn-danger px-4">Sí, Confirmar Baja</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

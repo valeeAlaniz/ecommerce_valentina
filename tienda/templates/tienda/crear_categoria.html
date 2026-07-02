@@ -1,0 +1,33 @@
+{% extends 'tienda/base.html' %}
+{% block title %}Nueva Categoría{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h3 class="card-title mb-4 fw-bold text-dark">Nueva Categoría</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'listar_categorias' %}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-dark">Guardar Categoría</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+        el.classList.add('form-control');
+    });
+</script>
+{% endblock %}
